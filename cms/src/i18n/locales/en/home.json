@@ -1,5 +1,5 @@
 {
-  "title": "Dashboard (CI test)",
+  "title": "Dashboard",
   "greeting": "Hello, {{name}}",
   "description": "This page is rendered on the server — translations are resolved before the HTML ever reaches the browser.",
   "stats": {
