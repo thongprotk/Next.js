@@ -5,6 +5,13 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 10
+    ignore:
+      # eslint-config-next@16.3.0 bundles an eslint-plugin-react build that
+      # breaks under ESLint 10 (context.getFilename() removed) even though
+      # its declared peerDependency range (>=9.0.0) allows it. Re-enable once
+      # eslint-config-next ships a compatible eslint-plugin-react.
+      - dependency-name: "eslint"
+        versions: [">=10"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
