@@ -1,0 +1,10 @@
+{
+  "title": "Tổng quan",
+  "greeting": "Xin chào, {{name}}",
+  "description": "Trang này được render ở server — bản dịch được xử lý xong trước khi HTML gửi tới trình duyệt.",
+  "stats": {
+    "ordersScanned": "Đơn hàng đã quét",
+    "fraudBlocked": "Gian lận đã chặn",
+    "activeRules": "Quy tắc đang hoạt động"
+  }
+}

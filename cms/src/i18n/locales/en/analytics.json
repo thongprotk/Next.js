@@ -1,0 +1,7 @@
+{
+  "title": "Analytics",
+  "badge": "Client Component",
+  "description": "This page uses the client-side useTranslation hook — the same JSON namespace, resolved in the browser instead of on the server.",
+  "lastUpdated": "Last updated: {{time}}",
+  "refresh": "Refresh"
+}

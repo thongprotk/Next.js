@@ -1,0 +1,7 @@
+{
+  "title": "Phân tích",
+  "badge": "Client Component",
+  "description": "Trang này dùng hook useTranslation phía client — cùng namespace JSON, nhưng được xử lý trong trình duyệt thay vì ở server.",
+  "lastUpdated": "Cập nhật lúc: {{time}}",
+  "refresh": "Làm mới"
+}

@@ -1,0 +1,9 @@
+{
+  "appName": "Fraud Blocker CMS",
+  "nav": {
+    "home": "Home",
+    "analytics": "Analytics"
+  },
+  "language": "Language",
+  "footer": "Built with Next.js + i18next"
+}

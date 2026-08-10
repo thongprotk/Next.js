@@ -1,0 +1,90 @@
+name: Preview Deployment
+
+# Cần 3 repo secrets trước khi workflow này chạy được (Settings → Secrets and
+# variables → Actions):
+#   VERCEL_TOKEN      → tạo tại https://vercel.com/account/tokens
+#   VERCEL_ORG_ID     → chạy `npx vercel link` trong cms/, đọc từ .vercel/project.json
+#   VERCEL_PROJECT_ID → cùng file .vercel/project.json ở trên
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "cms/**"
+      - ".github/workflows/preview.yml"
+
+concurrency:
+  group: preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  pull-requests: write
+
+defaults:
+  run:
+    working-directory: cms
+
+jobs:
+  deploy-preview:
+    name: Deploy Preview
+    runs-on: ubuntu-latest
+    environment: preview
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: cms/package-lock.json
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Pull Vercel environment info
+        run: vercel pull --yes --environment=preview
+
+      - name: Build project artifacts
+        run: vercel build
+
+      - name: Deploy prebuilt output to Vercel
+        id: deploy
+        run: |
+          url=$(vercel deploy --prebuilt)
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+
+      - name: Comment preview URL on the PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const marker = "<!-- vercel-preview-comment -->";
+            const url = process.env.PREVIEW_URL;
+            const body = `${marker}\n🔗 **Preview deployed:** ${url}`;
+
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            const existing = comments.find((c) => c.body.includes(marker));
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
+        env:
+          PREVIEW_URL: ${{ steps.deploy.outputs.url }}

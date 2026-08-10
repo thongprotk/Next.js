@@ -1,0 +1,24 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/cms"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    ignore:
+      # eslint-config-next@16.3.0 bundles an eslint-plugin-react build that
+      # breaks under ESLint 10 (context.getFilename() removed) even though
+      # its declared peerDependency range (>=9.0.0) allows it. Re-enable once
+      # eslint-config-next ships a compatible eslint-plugin-react.
+      - dependency-name: "eslint"
+        versions: [">=10"]
+      # eslint-config-next@16.3.0 bundles typescript-eslint, which explicitly
+      # throws "typescript-eslint does not support TS 7.0". Re-enable once
+      # eslint-config-next ships a compatible typescript-eslint.
+      - dependency-name: "typescript"
+        versions: [">=6"]
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
