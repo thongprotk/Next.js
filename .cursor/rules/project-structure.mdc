@@ -1,0 +1,30 @@
+---
+description: Demo monorepo structure — workspace layout, skill routing, naming discipline
+alwaysApply: true
+---
+
+# Demo — project structure
+
+Workspace is an **unnamed Demo**. Do not invent a product name.
+
+## Layout
+
+- Global guide: `CLAUDE.md` at workspace root
+- Only module today: `cms/` (Next.js App Router) — its own git root
+- Agent Skills (vendor/shared): `.agents/skills/<name>/` — locked by `skills-lock.json`
+- Claude skills: `.claude/skills/<module>/`
+- Cursor skills: `.cursor/skills/<module>/` (keep in sync with Claude)
+- Cursor rules: `.cursor/rules/*.mdc`
+
+## Before coding
+
+1. Identify module from path (`cms/` today)
+2. Read the matching module skill: `.cursor/skills/cms/SKILL.md` (or `.claude/skills/cms/`)
+3. If the task touches Supabase / Postgres / Auth / RLS / migrations → also read `.agents/skills/supabase/SKILL.md` and, for schema/SQL/perf/RLS authoring, `.agents/skills/supabase-postgres-best-practices/SKILL.md`
+4. Prefer extending existing folders over inventing new top-level dirs
+5. Do not scaffold `api/`, `tracker/`, or other modules unless the user asks
+6. Do not hand-edit locked `.agents` vendor skill bodies; update via the skill install + `skills-lock.json`
+
+## Done means
+
+Matches `CLAUDE.md` Definition of Done — real lint/type/build checks when relevant, no scope creep.

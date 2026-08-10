@@ -1,0 +1,20 @@
+---
+description: cms Next.js App Router + i18n + shadcn conventions
+globs: cms/**/*
+alwaysApply: false
+---
+
+# cms module
+
+Load `.cursor/skills/cms/SKILL.md` for full patterns. Short rules:
+
+- Routes only under `cms/src/app/[locale]/`
+- RSC → `getServerTranslation`; client → `useTranslation` + `useParams().locale`
+- User-facing copy → i18n JSON; keep `en` and `vi` keys in sync
+- Links → `getLocalizedPath(locale, path)`
+- UI primitives → shadcn under `src/components/ui/` (`components.json` style `base-nova`)
+- Locale redirect → `src/proxy.ts`
+- Alias `@/*` → `cms/src/*`
+- Git commands from `cms/` (separate `.git`)
+
+Never Do details live in the skill — follow them.

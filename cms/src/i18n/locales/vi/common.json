@@ -1,0 +1,9 @@
+{
+  "appName": "CMS Chống Gian Lận",
+  "nav": {
+    "home": "Trang chủ",
+    "analytics": "Phân tích"
+  },
+  "language": "Ngôn ngữ",
+  "footer": "Xây dựng với Next.js + i18next"
+}
