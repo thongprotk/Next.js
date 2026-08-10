@@ -1,0 +1,57 @@
+name: Production Deployment
+
+# Dùng chung 3 secret với preview.yml (VERCEL_TOKEN, VERCEL_ORG_ID,
+# VERCEL_PROJECT_ID) — xem preview.yml để biết cách lấy.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "cms/**"
+      - ".github/workflows/deploy.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: cms
+
+jobs:
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: cms/package-lock.json
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Pull Vercel environment info
+        run: vercel pull --yes --environment=production
+
+      - name: Build project artifacts
+        run: vercel build --prod
+
+      - name: Deploy prebuilt output to Vercel (production)
+        id: deploy
+        run: |
+          url=$(vercel deploy --prebuilt --prod)
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "### Deployed to production" >> "$GITHUB_STEP_SUMMARY"
+          echo "$url" >> "$GITHUB_STEP_SUMMARY"
