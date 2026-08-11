@@ -10,11 +10,8 @@ import React from "react";
 export const metadata: Metadata = {
   // ---- NHÓM 1: CORE — dùng ở gần như MỌI trang, quan trọng nhất ----------
 
-  /** <title> của tab browser + kết quả search. Quan trọng nhất cho SEO. */
-  title: "Analytics",
-
-  /** <meta name="description">. Google dùng đoạn này làm snippet kết quả tìm kiếm. */
-  description: "Real-time fraud analytics and order-scanning statistics.",
+  title: "Expense Analytics",
+  description: "Track and analyze your spending habits.",
 
   /**
    * canonical + hreflang cho các locale khác — CẦN THIẾT khi app có i18n như dự án

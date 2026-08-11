@@ -1,7 +1,24 @@
 {
-  "title": "Analytics",
-  "badge": "Client Component",
-  "description": "This page uses the client-side useTranslation hook — the same JSON namespace, resolved in the browser instead of on the server.",
-  "lastUpdated": "Last updated: {{time}}",
-  "refresh": "Refresh"
+  "title": "Expense Analytics",
+  "description": "Track and analyze your spending habits over time.",
+  "errorLoading": "Unable to load analytics data. Please try again later.",
+  "thisMonth": "This Month",
+  "last30Days": "Last 30 Days",
+  "avgPerDay": "Avg / Day",
+  "topCategory": "Top Category",
+  "vsLastMonth": "vs last month",
+  "spendingTrend": "Daily Spending Trend",
+  "byCategory": "By Category",
+  "recentExpenses": "Recent Expenses",
+  "categories": {
+    "food": "Food & Drinks",
+    "transport": "Transport",
+    "housing": "Housing",
+    "entertainment": "Entertainment",
+    "shopping": "Shopping",
+    "health": "Health",
+    "education": "Education",
+    "utilities": "Utilities",
+    "other": "Other"
+  }
 }

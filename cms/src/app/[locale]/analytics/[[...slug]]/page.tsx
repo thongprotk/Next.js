@@ -1,42 +1,67 @@
-"use client";
+import { getServerTranslation } from "@/i18n/server";
+import { getExpenses, getExpenseSummary } from "@/lib/supabase/expenses";
+import { SummaryCards } from "../_components/summary-cards";
+import { SpendingChart } from "../_components/spending-chart";
+import { CategoryBreakdown } from "../_components/category-breakdown";
+import { RecentExpenses } from "../_components/recent-expenses";
+import type { ExpenseCategory } from "@/lib/supabase/types";
 
-import { useState } from "react";
-import { useParams } from "next/navigation";
-import { useTranslation } from "@/i18n/client";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardFooter,
-} from "@/components/ui/card";
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
 
-export default function AnalyticsPage() {
-  const { locale } = useParams<{ locale: string }>();
-  const { t } = useTranslation(locale, "analytics");
-  const [lastUpdated, setLastUpdated] = useState<string | null>(null);
+export default async function AnalyticsPage({ params }: PageProps) {
+  const { locale } = await params;
+  const { t } = await getServerTranslation(locale, "analytics");
+
+  let summary;
+  let recentExpenses;
+
+  try {
+    [summary, recentExpenses] = await Promise.all([
+      getExpenseSummary(),
+      getExpenses({ limit: 10 }),
+    ]);
+  } catch {
+    return (
+      <div className="flex flex-col gap-6">
+        <h1 className="text-2xl font-semibold tracking-tight">{t("title")}</h1>
+        <p className="text-sm text-muted-foreground">{t("errorLoading")}</p>
+      </div>
+    );
+  }
+
+  const categories: ExpenseCategory[] = [
+    "food", "transport", "housing", "entertainment",
+    "shopping", "health", "education", "utilities", "other",
+  ];
+  const categoryLabels = Object.fromEntries(
+    categories.map((c) => [c, t(`categories.${c}`)])
+  );
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex items-center gap-2">
+      <div>
         <h1 className="text-2xl font-semibold tracking-tight">{t("title")}</h1>
-        <Badge variant="secondary">{t("badge")}</Badge>
+        <p className="mt-1 text-sm text-muted-foreground">{t("description")}</p>
       </div>
-      <p className="max-w-xl text-sm text-muted-foreground">{t("description")}</p>
 
-      <Card className="max-w-sm">
-        <CardHeader>
-          <CardTitle>{t("lastUpdated", { time: lastUpdated ?? "—" })}</CardTitle>
-          <CardDescription>useTranslation(locale, &quot;analytics&quot;)</CardDescription>
-        </CardHeader>
-        <CardFooter>
-          <Button onClick={() => setLastUpdated(new Date().toLocaleTimeString(locale))}>
-            {t("refresh")}
-          </Button>
-        </CardFooter>
-      </Card>
+      <SummaryCards summary={summary} t={t} />
+
+      <div className="grid gap-4 lg:grid-cols-2">
+        <SpendingChart data={summary.dailyTrend} title={t("spendingTrend")} />
+        <CategoryBreakdown
+          data={summary.byCategory}
+          title={t("byCategory")}
+          categoryLabels={categoryLabels}
+        />
+      </div>
+
+      <RecentExpenses
+        expenses={recentExpenses}
+        title={t("recentExpenses")}
+        categoryLabels={categoryLabels}
+      />
     </div>
   );
 }

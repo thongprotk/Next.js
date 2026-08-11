@@ -1,7 +1,24 @@
 {
-  "title": "Phân tích",
-  "badge": "Client Component",
-  "description": "Trang này dùng hook useTranslation phía client — cùng namespace JSON, nhưng được xử lý trong trình duyệt thay vì ở server.",
-  "lastUpdated": "Cập nhật lúc: {{time}}",
-  "refresh": "Làm mới"
+  "title": "Phân tích Chi tiêu",
+  "description": "Theo dõi và phân tích thói quen chi tiêu theo thời gian.",
+  "errorLoading": "Không thể tải dữ liệu. Vui lòng thử lại sau.",
+  "thisMonth": "Tháng này",
+  "last30Days": "30 ngày qua",
+  "avgPerDay": "TB / Ngày",
+  "topCategory": "Danh mục nhiều nhất",
+  "vsLastMonth": "so với tháng trước",
+  "spendingTrend": "Xu hướng chi tiêu hàng ngày",
+  "byCategory": "Theo danh mục",
+  "recentExpenses": "Chi tiêu gần đây",
+  "categories": {
+    "food": "Ăn uống",
+    "transport": "Di chuyển",
+    "housing": "Nhà ở",
+    "entertainment": "Giải trí",
+    "shopping": "Mua sắm",
+    "health": "Sức khoẻ",
+    "education": "Học tập",
+    "utilities": "Tiện ích",
+    "other": "Khác"
+  }
 }
