@@ -12,3 +12,8 @@ services:
     environment:
       - NODE_ENV=production
     restart: unless-stopped
+    networks:
+      - cms-dev
+networks:
+  cms-dev:
+    driver: bridge
