@@ -1,9 +1,14 @@
 {
-  "appName": "CMS Chống Gian Lận",
+  "appName": "Quản lý Bán hàng",
   "nav": {
-    "home": "Trang chủ",
+    "home": "Tổng quan",
+    "products": "Sản phẩm",
+    "sales": "Bán hàng",
+    "purchases": "Nhập hàng",
+    "expenses": "Chi tiêu",
+    "tax": "Thuế VAT",
     "analytics": "Phân tích"
   },
   "language": "Ngôn ngữ",
-  "footer": "Xây dựng với Next.js + i18next"
+  "footer": "Xây dựng với Next.js + Supabase"
 }

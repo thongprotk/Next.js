@@ -1,0 +1,12 @@
+{
+  "title": "Products",
+  "addProduct": "Add Product",
+  "name": "Product Name",
+  "sku": "SKU",
+  "unit": "Unit",
+  "price": "Default Price",
+  "description": "Description",
+  "empty": "No products yet.",
+  "delete": "Delete",
+  "add": "Add"
+}

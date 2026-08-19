@@ -22,10 +22,10 @@ export const metadata: Metadata = {
   // route con — chỉ cần set 1 lần ở đây, không lặp lại ở từng layout/page con.
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   title: {
-    default: "Fraud Blocker CMS",
-    template: "%s | Fraud Blocker CMS",
+    default: "Quản lý Bán hàng",
+    template: "%s | Quản lý Bán hàng",
   },
-  description: "Merchant dashboard for fraud detection and order protection.",
+  description: "Quản lý sản phẩm, bán hàng, nhập hàng, chi tiêu và thuế VAT.",
 };
 
 export function generateStaticParams() {
@@ -45,7 +45,7 @@ export default async function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col`}>
         <TooltipProvider>
           <SiteHeader locale={locale} />
-          <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col px-6 py-10">
+          <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col px-4 py-6 sm:px-6">
             {children}
           </main>
           <SiteFooter locale={locale} />

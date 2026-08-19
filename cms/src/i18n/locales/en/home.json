@@ -1,10 +1,10 @@
 {
-  "title": "Dashboard",
-  "greeting": "Hello, {{name}}",
-  "description": "This page is rendered on the server — translations are resolved before the HTML ever reaches the browser.",
+  "title": "Overview",
+  "greeting": "Hello, {{name}}!",
+  "description": "Manage products, sales, purchases, expenses and VAT tax.",
   "stats": {
-    "ordersScanned": "Orders scanned",
-    "fraudBlocked": "Fraud blocked",
-    "activeRules": "Active rules"
+    "totalProducts": "Products",
+    "totalSales": "Sales Invoices",
+    "totalRevenue": "Monthly Revenue"
   }
 }

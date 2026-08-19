@@ -1,0 +1,12 @@
+{
+  "title": "Sản phẩm",
+  "addProduct": "Thêm sản phẩm",
+  "name": "Tên sản phẩm",
+  "sku": "Mã SKU",
+  "unit": "Đơn vị",
+  "price": "Giá mặc định",
+  "description": "Mô tả",
+  "empty": "Chưa có sản phẩm nào.",
+  "delete": "Xóa",
+  "add": "Thêm"
+}

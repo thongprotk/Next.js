@@ -1,0 +1,11 @@
+{
+  "title": "Expenses",
+  "addExpense": "Add Expense",
+  "date": "Date",
+  "description": "Description",
+  "category": "Category",
+  "amount": "Amount",
+  "empty": "No expenses yet.",
+  "delete": "Delete",
+  "add": "Add"
+}

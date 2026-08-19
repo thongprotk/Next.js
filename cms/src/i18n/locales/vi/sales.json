@@ -1,0 +1,19 @@
+{
+  "title": "Bán hàng",
+  "createInvoice": "Tạo hóa đơn",
+  "date": "Ngày",
+  "invoiceNumber": "Số hóa đơn",
+  "customer": "Khách hàng",
+  "notes": "Ghi chú",
+  "product": "Sản phẩm",
+  "quantity": "SL",
+  "unitPrice": "Đơn giá",
+  "lineTotal": "Thành tiền",
+  "addItem": "Thêm dòng",
+  "subtotal": "Tạm tính",
+  "vat": "VAT (10%)",
+  "total": "Tổng cộng",
+  "submit": "Lưu hóa đơn",
+  "empty": "Chưa có hóa đơn nào.",
+  "delete": "Xóa"
+}

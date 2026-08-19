@@ -1,9 +1,14 @@
 {
-  "appName": "Fraud Blocker CMS",
+  "appName": "Sales Manager",
   "nav": {
-    "home": "Home",
+    "home": "Overview",
+    "products": "Products",
+    "sales": "Sales",
+    "purchases": "Purchases",
+    "expenses": "Expenses",
+    "tax": "VAT Tax",
     "analytics": "Analytics"
   },
   "language": "Language",
-  "footer": "Built with Next.js + i18next"
+  "footer": "Built with Next.js + Supabase"
 }

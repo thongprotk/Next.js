@@ -1,0 +1,10 @@
+{
+  "title": "Thuế VAT",
+  "totalRevenue": "Doanh thu (chưa VAT)",
+  "vatDue": "Thuế VAT phải nộp",
+  "totalInclVat": "Tổng (gồm VAT)",
+  "invoices": "Hóa đơn bán hàng",
+  "empty": "Chưa có dữ liệu thuế.",
+  "thisMonth": "Tháng này",
+  "thisYear": "Năm nay"
+}

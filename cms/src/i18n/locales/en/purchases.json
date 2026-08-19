@@ -1,0 +1,19 @@
+{
+  "title": "Purchases",
+  "createInvoice": "Create Purchase",
+  "date": "Date",
+  "invoiceNumber": "PO #",
+  "supplier": "Supplier",
+  "notes": "Notes",
+  "product": "Product",
+  "quantity": "Qty",
+  "unitPrice": "Unit Price",
+  "lineTotal": "Line Total",
+  "addItem": "Add Item",
+  "subtotal": "Subtotal",
+  "vat": "VAT (10%)",
+  "total": "Total",
+  "submit": "Save Purchase",
+  "empty": "No purchases yet.",
+  "delete": "Delete"
+}

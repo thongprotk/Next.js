@@ -1,0 +1,10 @@
+{
+  "title": "VAT Tax",
+  "totalRevenue": "Revenue (excl. VAT)",
+  "vatDue": "VAT Due",
+  "totalInclVat": "Total (incl. VAT)",
+  "invoices": "Sales Invoices",
+  "empty": "No tax data yet.",
+  "thisMonth": "This Month",
+  "thisYear": "This Year"
+}

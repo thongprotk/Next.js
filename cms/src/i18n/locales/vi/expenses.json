@@ -1,0 +1,11 @@
+{
+  "title": "Chi tiêu",
+  "addExpense": "Thêm chi tiêu",
+  "date": "Ngày",
+  "description": "Mô tả",
+  "category": "Danh mục",
+  "amount": "Số tiền",
+  "empty": "Chưa có chi tiêu nào.",
+  "delete": "Xóa",
+  "add": "Thêm"
+}

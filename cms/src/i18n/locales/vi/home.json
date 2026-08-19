@@ -1,10 +1,10 @@
 {
   "title": "Tổng quan",
-  "greeting": "Xin chào, {{name}}",
-  "description": "Trang này được render ở server — bản dịch được xử lý xong trước khi HTML gửi tới trình duyệt.",
+  "greeting": "Xin chào, {{name}}!",
+  "description": "Quản lý sản phẩm, bán hàng, nhập hàng, chi tiêu và thuế VAT.",
   "stats": {
-    "ordersScanned": "Đơn hàng đã quét",
-    "fraudBlocked": "Gian lận đã chặn",
-    "activeRules": "Quy tắc đang hoạt động"
+    "totalProducts": "Sản phẩm",
+    "totalSales": "Hóa đơn bán",
+    "totalRevenue": "Doanh thu tháng"
   }
 }
