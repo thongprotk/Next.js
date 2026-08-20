@@ -2,7 +2,7 @@
 
 # --- deps: cài dependency riêng để tận dụng cache layer khi source code đổi nhưng package*.json không đổi
 FROM node:24-alpine AS deps
-WORKDIR usr/src/app
+WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
 RUN npm ci --silent
 
