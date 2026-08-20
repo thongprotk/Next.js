@@ -6,6 +6,15 @@ WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
 RUN npm ci --silent
 
+# -- runner: Dev
+FROM node:24-alpine AS dev
+WORKDIR /usr/src/app
+COPY --from=deps /usr/src/app/node_modules ./node_modules
+COPY . .
+ENV NEXT_TELEMETRY_DISABLED=1
+EXPOSE 3000
+CMD ["npm", "run", "dev"]
+
 # --- builder: build Next.js với deps đã cài ở stage trên
 FROM node:24-alpine AS builder
 WORKDIR /usr/src/app
