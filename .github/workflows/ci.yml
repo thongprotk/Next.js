@@ -37,7 +37,7 @@ jobs:
           cache: npm
           cache-dependency-path: cms/package-lock.json
 
-      - run: npm ci
+      - run: npm ci --silent
       - run: npm run lint
 
   typecheck:
@@ -52,7 +52,7 @@ jobs:
           cache: npm
           cache-dependency-path: cms/package-lock.json
 
-      - run: npm ci
+      - run: npm ci --silent
       - run: npx tsc --noEmit
 
   build:
@@ -68,7 +68,7 @@ jobs:
           cache: npm
           cache-dependency-path: cms/package-lock.json
 
-      - run: npm ci
+      - run: npm ci --silent
       - name: Build
         run: npm run build
         env:
