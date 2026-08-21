@@ -1,3 +1,6 @@
+# Base — không tự publish port ra ngoài. Luôn chạy kèm 1 overlay:
+#   - docker-compose.shared-tunnel.yml: máy dev dùng chung Cloudflare Tunnel
+#   - docker-compose.dev.yml: code local, hot-reload
 services:
   cms:
     container_name: cms
@@ -7,13 +10,25 @@ services:
       args:
         NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
         NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY}
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
     environment:
       - NODE_ENV=production
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+      retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
     networks:
       - cms-dev
+
 networks:
   cms-dev:
     driver: bridge

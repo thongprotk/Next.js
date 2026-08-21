@@ -1,0 +1,20 @@
+# Overlay cho code local, hot-reload (npm run dev trong container, bind-mount source).
+# Chạy: docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build cms
+# - http://localhost:3000           truy cập trực tiếp
+# - dev-cms.dev-bsscommerce.com     qua Cloudflare Tunnel chung của team (domain_list: :9999)
+services:
+  cms:
+    build:
+      target: dev
+    environment:
+      - NODE_ENV=development
+    ports:
+      - "3000:3000"
+      - "9999:3000"
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
+    command: npm run dev
+    healthcheck:
+      disable: true
