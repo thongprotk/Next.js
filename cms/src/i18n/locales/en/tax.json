@@ -4,6 +4,7 @@
   "vatDue": "VAT Due",
   "totalInclVat": "Total (incl. VAT)",
   "invoices": "Sales Invoices",
+  "date": "Date",
   "empty": "No tax data yet.",
   "thisMonth": "This Month",
   "thisYear": "This Year"

@@ -1,7 +1,6 @@
 import { revalidatePath } from "next/cache";
 import { getServerTranslation } from "@/i18n/server";
 import { getProducts, createProduct, deleteProduct } from "@/lib/supabase/products";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -49,82 +48,75 @@ export default async function ProductsPage({
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <span className="rounded-xl bg-teal-50 p-3 text-teal-600">
-            <Package className="size-6" />
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center gap-3.5">
+          <span className="rounded-2xl bg-teal-50 p-3 text-teal-600 dark:bg-teal-500/10 dark:text-teal-400">
+            <Package className="size-5" />
           </span>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900">
-            {t("title")}
-          </h1>
+          <div>
+            <h1 className="text-2xl font-semibold tracking-tight text-foreground">
+              {t("title")}
+            </h1>
+            <p className="text-sm text-muted-foreground">{products.length} {t("title").toLowerCase()}</p>
+          </div>
         </div>
         <ProductForm action={handleCreate} />
       </div>
 
-      <Card>
-        <CardHeader className="pb-3">
-          <CardTitle className="text-base text-slate-700">
-            {t("title")}
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="p-0">
-          {products.length === 0 ? (
-            <p className="px-6 py-10 text-center text-sm text-slate-400">
-              {t("empty")}
-            </p>
-          ) : (
-            <Table>
-              <TableHeader>
-                <TableRow className="bg-slate-50">
-                  <TableHead>{t("name")}</TableHead>
-                  <TableHead>{t("sku")}</TableHead>
-                  <TableHead>{t("unit")}</TableHead>
-                  <TableHead className="text-right">{t("price")}</TableHead>
-                  <TableHead>{t("description")}</TableHead>
-                  <TableHead className="w-16" />
+      {products.length === 0 ? (
+        <p className="rounded-2xl bg-card px-6 py-14 text-center text-sm text-muted-foreground shadow-(--shadow-soft)">
+          {t("empty")}
+        </p>
+      ) : (
+        <div className="overflow-hidden rounded-2xl bg-card shadow-(--shadow-soft)">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>{t("name")}</TableHead>
+                <TableHead>{t("sku")}</TableHead>
+                <TableHead>{t("unit")}</TableHead>
+                <TableHead className="text-right">{t("price")}</TableHead>
+                <TableHead>{t("description")}</TableHead>
+                <TableHead className="w-16" />
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {products.map((product) => (
+                <TableRow key={product.id}>
+                  <TableCell className="font-medium text-foreground">
+                    {product.name}
+                  </TableCell>
+                  <TableCell className="text-muted-foreground">
+                    {product.sku ?? "—"}
+                  </TableCell>
+                  <TableCell className="text-muted-foreground">
+                    {product.unit}
+                  </TableCell>
+                  <TableCell className="text-right font-medium text-foreground">
+                    {currencyFmt.format(product.default_price)}
+                  </TableCell>
+                  <TableCell className="max-w-[200px] truncate text-muted-foreground">
+                    {product.description ?? "—"}
+                  </TableCell>
+                  <TableCell>
+                    <form action={handleDelete}>
+                      <input type="hidden" name="id" value={product.id} />
+                      <Button
+                        type="submit"
+                        variant="ghost"
+                        size="icon"
+                        className="size-8 rounded-full text-muted-foreground hover:text-destructive"
+                      >
+                        <Trash2 className="size-4" />
+                      </Button>
+                    </form>
+                  </TableCell>
                 </TableRow>
-              </TableHeader>
-              <TableBody>
-                {products.map((product, i) => (
-                  <TableRow
-                    key={product.id}
-                    className={i % 2 === 0 ? "bg-white" : "bg-slate-50/60"}
-                  >
-                    <TableCell className="font-medium text-slate-900">
-                      {product.name}
-                    </TableCell>
-                    <TableCell className="text-slate-500">
-                      {product.sku ?? "—"}
-                    </TableCell>
-                    <TableCell className="text-slate-500">
-                      {product.unit}
-                    </TableCell>
-                    <TableCell className="text-right font-mono text-slate-700">
-                      {currencyFmt.format(product.default_price)}
-                    </TableCell>
-                    <TableCell className="max-w-[200px] truncate text-slate-500">
-                      {product.description ?? "—"}
-                    </TableCell>
-                    <TableCell>
-                      <form action={handleDelete}>
-                        <input type="hidden" name="id" value={product.id} />
-                        <Button
-                          type="submit"
-                          variant="ghost"
-                          size="icon"
-                          className="size-8 text-slate-400 hover:text-red-600"
-                        >
-                          <Trash2 className="size-4" />
-                        </Button>
-                      </form>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          )}
-        </CardContent>
-      </Card>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      )}
     </div>
   );
 }

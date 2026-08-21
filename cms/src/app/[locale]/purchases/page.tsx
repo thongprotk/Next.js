@@ -2,7 +2,6 @@ import { getServerTranslation } from "@/i18n/server";
 import { getPurchaseInvoices, createPurchaseInvoice, deletePurchaseInvoice } from "@/lib/supabase/purchases";
 import { getProducts } from "@/lib/supabase/products";
 import { revalidatePath } from "next/cache";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -69,11 +68,11 @@ export default async function PurchasesPage({
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="flex items-center gap-3">
-        <span className="rounded-xl bg-orange-50 p-3 text-orange-600">
-          <ShoppingCart className="size-6" />
+      <div className="flex items-center gap-3.5">
+        <span className="rounded-2xl bg-orange-50 p-3 text-orange-600 dark:bg-orange-500/10 dark:text-orange-400">
+          <ShoppingCart className="size-5" />
         </span>
-        <h1 className="text-2xl font-bold tracking-tight text-slate-900">
+        <h1 className="text-2xl font-semibold tracking-tight text-foreground">
           {t("title")}
         </h1>
       </div>
@@ -99,68 +98,63 @@ export default async function PurchasesPage({
         }}
       />
 
-      <Card>
-        <CardHeader>
-          <CardTitle>{t("title")}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          {invoices.length === 0 ? (
-            <p className="py-8 text-center text-sm text-slate-500">
-              {t("empty")}
-            </p>
-          ) : (
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>{t("date")}</TableHead>
-                  <TableHead>{t("invoiceNumber")}</TableHead>
-                  <TableHead>{t("supplier")}</TableHead>
-                  <TableHead className="text-right">{t("subtotal")}</TableHead>
-                  <TableHead className="text-right">{t("vat")}</TableHead>
-                  <TableHead className="text-right">{t("total")}</TableHead>
-                  <TableHead />
+      {invoices.length === 0 ? (
+        <p className="rounded-2xl bg-card px-6 py-14 text-center text-sm text-muted-foreground shadow-(--shadow-soft)">
+          {t("empty")}
+        </p>
+      ) : (
+        <div className="overflow-hidden rounded-2xl bg-card shadow-(--shadow-soft)">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>{t("date")}</TableHead>
+                <TableHead>{t("invoiceNumber")}</TableHead>
+                <TableHead>{t("supplier")}</TableHead>
+                <TableHead className="text-right">{t("subtotal")}</TableHead>
+                <TableHead className="text-right">{t("vat")}</TableHead>
+                <TableHead className="text-right">{t("total")}</TableHead>
+                <TableHead />
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {invoices.map((inv) => (
+                <TableRow key={inv.id}>
+                  <TableCell className="text-muted-foreground">{inv.date}</TableCell>
+                  <TableCell>
+                    {inv.invoice_number ? (
+                      <Badge variant="outline">{inv.invoice_number}</Badge>
+                    ) : (
+                      <span className="text-muted-foreground">—</span>
+                    )}
+                  </TableCell>
+                  <TableCell className="text-foreground">{inv.supplier_name ?? "—"}</TableCell>
+                  <TableCell className="text-right text-muted-foreground">
+                    {fmt.format(inv.subtotal)}
+                  </TableCell>
+                  <TableCell className="text-right text-muted-foreground">
+                    {fmt.format(inv.vat_amount)}
+                  </TableCell>
+                  <TableCell className="text-right font-semibold text-foreground">
+                    {fmt.format(inv.total)}
+                  </TableCell>
+                  <TableCell className="text-right">
+                    <form action={handleDelete}>
+                      <input type="hidden" name="id" value={inv.id} />
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="size-8 rounded-full text-muted-foreground hover:text-destructive"
+                      >
+                        <Trash2 className="size-4" />
+                      </Button>
+                    </form>
+                  </TableCell>
                 </TableRow>
-              </TableHeader>
-              <TableBody>
-                {invoices.map((inv) => (
-                  <TableRow key={inv.id}>
-                    <TableCell>{inv.date}</TableCell>
-                    <TableCell>
-                      {inv.invoice_number ? (
-                        <Badge variant="outline">{inv.invoice_number}</Badge>
-                      ) : (
-                        "—"
-                      )}
-                    </TableCell>
-                    <TableCell>{inv.supplier_name ?? "—"}</TableCell>
-                    <TableCell className="text-right">
-                      {fmt.format(inv.subtotal)}
-                    </TableCell>
-                    <TableCell className="text-right">
-                      {fmt.format(inv.vat_amount)}
-                    </TableCell>
-                    <TableCell className="text-right font-semibold">
-                      {fmt.format(inv.total)}
-                    </TableCell>
-                    <TableCell className="text-right">
-                      <form action={handleDelete}>
-                        <input type="hidden" name="id" value={inv.id} />
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="text-red-500 hover:text-red-700"
-                        >
-                          <Trash2 className="size-4" />
-                        </Button>
-                      </form>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          )}
-        </CardContent>
-      </Card>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      )}
     </div>
   );
 }

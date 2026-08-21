@@ -10,5 +10,11 @@
     "analytics": "Analytics"
   },
   "language": "Language",
-  "footer": "Built with Next.js + Supabase"
+  "footer": "Built with Next.js + Supabase",
+  "error": {
+    "title": "Something went wrong",
+    "description": "We couldn't load this page. This is usually a temporary connection issue — please try again.",
+    "retry": "Try again",
+    "home": "Back to overview"
+  }
 }

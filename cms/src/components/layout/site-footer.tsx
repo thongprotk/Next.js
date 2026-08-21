@@ -4,7 +4,7 @@ export async function SiteFooter({ locale }: { locale: string }) {
   const { t } = await getServerTranslation(locale, "common");
 
   return (
-    <footer className="border-t border-border py-6 text-center text-sm text-muted-foreground">
+    <footer className="py-10 text-center text-xs text-muted-foreground/80">
       {t("footer")}
     </footer>
   );

@@ -10,5 +10,11 @@
     "analytics": "Phân tích"
   },
   "language": "Ngôn ngữ",
-  "footer": "Xây dựng với Next.js + Supabase"
+  "footer": "Xây dựng với Next.js + Supabase",
+  "error": {
+    "title": "Đã có lỗi xảy ra",
+    "description": "Không thể tải trang này. Đây thường là lỗi kết nối tạm thời — vui lòng thử lại.",
+    "retry": "Thử lại",
+    "home": "Về trang tổng quan"
+  }
 }

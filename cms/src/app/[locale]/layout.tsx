@@ -43,9 +43,13 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col`}>
+        <div
+          aria-hidden
+          className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-120 bg-[radial-gradient(60%_50%_at_50%_0%,var(--color-accent),transparent_70%)] opacity-60"
+        />
         <TooltipProvider>
           <SiteHeader locale={locale} />
-          <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col px-4 py-6 sm:px-6">
+          <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col px-4 py-8 sm:px-6 sm:py-10">
             {children}
           </main>
           <SiteFooter locale={locale} />

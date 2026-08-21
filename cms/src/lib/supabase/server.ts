@@ -12,6 +12,11 @@ export async function createClient() {
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
     {
+      global: {
+        // Fail fast instead of hanging on a stalled connection so a network
+        // blip surfaces the error boundary in seconds, not tens of seconds.
+        fetch: (url, options) => fetch(url, { ...options, signal: AbortSignal.timeout(6000) }),
+      },
       cookies: {
         getAll() {
           return cookieStore.getAll()

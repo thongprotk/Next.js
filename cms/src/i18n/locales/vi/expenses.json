@@ -7,5 +7,16 @@
   "amount": "Số tiền",
   "empty": "Chưa có chi tiêu nào.",
   "delete": "Xóa",
-  "add": "Thêm"
+  "add": "Thêm",
+  "categories": {
+    "food": "Ăn uống",
+    "transport": "Đi lại",
+    "housing": "Nhà ở",
+    "entertainment": "Giải trí",
+    "shopping": "Mua sắm",
+    "health": "Sức khỏe",
+    "education": "Giáo dục",
+    "utilities": "Tiện ích",
+    "other": "Khác"
+  }
 }

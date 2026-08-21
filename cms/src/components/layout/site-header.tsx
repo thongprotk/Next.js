@@ -16,11 +16,11 @@ export async function SiteHeader({ locale }: { locale: string }) {
   ];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
-      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
+    <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg supports-backdrop-filter:bg-background/70">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
         <Link
           href={getLocalizedPath(locale, "/")}
-          className="shrink-0 text-base font-bold tracking-tight text-slate-900"
+          className="shrink-0 text-base font-semibold tracking-tight text-foreground"
         >
           {t("appName")}
         </Link>
@@ -29,7 +29,7 @@ export async function SiteHeader({ locale }: { locale: string }) {
             <Link
               key={link.href}
               href={link.href}
-              className="shrink-0 rounded-md px-3 py-1.5 font-medium text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900"
+              className="shrink-0 rounded-full px-3.5 py-1.5 font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
             >
               {link.label}
             </Link>
@@ -37,6 +37,7 @@ export async function SiteHeader({ locale }: { locale: string }) {
         </nav>
         <LanguageSwitcher />
       </div>
+      <div className="h-px bg-linear-to-r from-transparent via-border to-transparent" />
     </header>
   );
 }

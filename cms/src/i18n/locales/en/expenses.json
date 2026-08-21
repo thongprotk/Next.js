@@ -7,5 +7,16 @@
   "amount": "Amount",
   "empty": "No expenses yet.",
   "delete": "Delete",
-  "add": "Add"
+  "add": "Add",
+  "categories": {
+    "food": "Food",
+    "transport": "Transport",
+    "housing": "Housing",
+    "entertainment": "Entertainment",
+    "shopping": "Shopping",
+    "health": "Health",
+    "education": "Education",
+    "utilities": "Utilities",
+    "other": "Other"
+  }
 }

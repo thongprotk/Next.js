@@ -62,6 +62,20 @@ create table if not exists purchase_invoice_items (
   created_at timestamptz not null default now()
 );
 
+-- Expenses
+create table if not exists expenses (
+  id uuid primary key default gen_random_uuid(),
+  amount bigint not null default 0,
+  category text not null check (category in (
+    'food', 'transport', 'housing', 'entertainment', 'shopping',
+    'health', 'education', 'utilities', 'other'
+  )),
+  description text not null,
+  date date not null default current_date,
+  user_id uuid references auth.users(id),
+  created_at timestamptz not null default now()
+);
+
 -- Indexes
 create index if not exists idx_sales_invoices_date on sales_invoices(date);
 create index if not exists idx_purchase_invoices_date on purchase_invoices(date);
